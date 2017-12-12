@@ -1,0 +1,32 @@
+{
+  "name": "bookshelf-ez-fetch",
+  "version": "1.0.0",
+  "description": "Convenient fetching methods which allow for compact filtering, relation selection and error handling. (Bookshelf ORM)",
+  "main": "dist/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "start": "npm run build && node ./example/index",
+    "build": "babel src -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djandries/bookshelf-ez-fetch.git"
+  },
+  "author": "Darnell Andries",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/djandries/bookshelf-ez-fetch/issues"
+  },
+  "homepage": "https://github.com/djandries/bookshelf-ez-fetch#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "bookshelf": "^0.12.0",
+    "knex": "^0.14.2",
+    "sqlite3": "^3.1.13"
+  }
+}
