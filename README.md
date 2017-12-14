@@ -16,11 +16,11 @@ bookshelf.plugin(ezFetch())
 
 ## Usage
 
-#### Model.ezFetch(filters, subfields, columns)
+#### Model.ezFetch(filters, subfields, columns, noNotFoundHandling)
 
 #### Model.ezFetchAll(filters, subfields, columns)
 
-All parameters are optional.
+**All parameters are optional.**
 
 ##### filters
 
@@ -53,6 +53,10 @@ The value of the entry can also be an array, which specifies which columns to fe
 ##### columns
 
 Array of columns to fetch from model
+
+##### noNotFoundHandling
+
+Set this to true to prevent calling any "not found" handlers defined in the model or plugin (see below).
 
 ## Example
 

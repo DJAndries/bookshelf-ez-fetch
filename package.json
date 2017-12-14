@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-ez-fetch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convenient fetching methods which allow for compact filtering, relation selection and error handling. (Bookshelf ORM)",
   "main": "dist/index.js",
   "directories": {

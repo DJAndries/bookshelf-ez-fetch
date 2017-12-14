@@ -53,7 +53,7 @@ const processFilters = (filters) => {
   return result
 }
 
-const fetch = (instance, filters, columns, subfields, all, config, stat) => {
+const fetch = (instance, filters, columns, subfields, all, noNotFoundHandling, config, stat) => {
   const processedFilters = processFilters(filters)
   const processedSubfields = processSubfields(subfields)
   let q = instance.where(processedFilters[0])
@@ -66,7 +66,7 @@ const fetch = (instance, filters, columns, subfields, all, config, stat) => {
     return q.fetchAll({columns, withRelated: processedSubfields})
   } else {
     return q.fetch({columns, withRelated: processedSubfields}).then((result) => {
-      if (!result) {
+      if (!result && !noNotFoundHandling) {
         const model = stat ? instance.forge() : instance
         if (model.notFoundHandler) {
           model.notFoundHandler()
@@ -82,18 +82,18 @@ const fetch = (instance, filters, columns, subfields, all, config, stat) => {
 const extend = (bookshelf, config) => {
   const proto = bookshelf.Model.prototype
   bookshelf.Model = bookshelf.Model.extend({
-    ezFetch: function(filters, subfields, columns) {
-      return fetch(this, filters, columns, subfields, false, config)
+    ezFetch: function(filters, subfields, columns, noNotFoundHandling) {
+      return fetch(this, filters, columns, subfields, false, noNotFoundHandling, config)
     },
     ezFetchAll: function(filters, subfields, columns) {
-      return fetch(this, filters, columns, subfields, true, config)
+      return fetch(this, filters, columns, subfields, true, false, config)
     },
   }, {
     ezFetchAll: function(filters, subfields, columns) {
-      return fetch(this, filters, columns, subfields, true, config, true)
+      return fetch(this, filters, columns, subfields, true, false, config, true)
     },
-    ezFetch: function(filters, subfields, columns) {
-      return fetch(this, filters, columns, subfields, false, config, true)
+    ezFetch: function(filters, subfields, columns, noNotFoundHandling) {
+      return fetch(this, filters, columns, subfields, false, noNotFoundHandling, config, true)
     }
   })
 }
